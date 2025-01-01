@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         // SonarQube Environment Variables
-        SONAR_HOST_URL = 'http://<SonarQube-Server-URL>' // Replace with your SonarQube server URL
-        SONAR_AUTH_TOKEN = '<SonarQube-Auth-Token>'      // Replace with your SonarQube authentication token
+        SONAR_HOST_URL = 'http://localhost:9000' // Replace with your SonarQube server URL
+        SONAR_AUTH_TOKEN = 'all_project_token'      // Replace with your SonarQube authentication token
     }
 
     stages {
@@ -32,7 +32,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 echo 'Running SonarQube analysis...'
-                withSonarQubeEnv('SonarQube') { // 'SonarQube' is the name of your SonarQube server in Jenkins
+                withSonarQubeEnv('sonarqube server') { // 'SonarQube' is the name of your SonarQube server in Jenkins
                     sh 'mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_AUTH_TOKEN'
                 }
             }
